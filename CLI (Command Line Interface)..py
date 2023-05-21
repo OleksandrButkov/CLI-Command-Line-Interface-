@@ -1,7 +1,7 @@
 CONTACTS = {}  # Словник для збереження контактів
 
 
-def input_error(func):
+def input_error(func):                              # Декоратор, який оброблює виключення
     def inner(*args, **kwargs):
         try:
             return func(*args, **kwargs)
@@ -15,33 +15,33 @@ def input_error(func):
 
 
 @input_error
-def handle_hello():
+def handle_hello():                                 # Привітальна функція, після фрази "Hello"
     return "How can I help you?"
 
 
 @input_error
-def handle_add(input_str):
+def handle_add(input_str):                          # Функція додавання контакту з розділом по пробілу
     name, phone = input_str.split(' ', 1)
     CONTACTS[name] = phone
     return "Contact added successfully."
 
 
 @input_error
-def handle_change(input_str):
+def handle_change(input_str):                       # Функція зміни контакту з розділом по пробілу
     name, phone = input_str.split(' ', 1)
     CONTACTS[name] = phone
     return "Phone number updated successfully."
 
 
 @input_error
-def handle_phone(input_str):
+def handle_phone(input_str):                        # Функція, яка знаходить номер телефону для зазначеного контакту
     if input_str not in CONTACTS:
         raise IndexError
     return CONTACTS[input_str]
 
 
 @input_error
-def handle_show_all():
+def handle_show_all():                              # Функція, яка показує весь список контактів
     if not CONTACTS:
         return "No contacts found."
     else:
@@ -51,7 +51,7 @@ def handle_show_all():
         return result
 
 
-def main():
+def main():                                         # Основна функція, в якій знаходяться всі print та input
     while True:
         command = input("Enter a command: ").lower()
         if command == "good bye" or command == "close" or command == "exit":
